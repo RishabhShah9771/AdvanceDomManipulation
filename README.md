@@ -1,36 +1,35 @@
-# AdvanceDomManipulation
+# Advanced DOM Manipulation
 
-## What is DOM?
+## What is the DOM?
 
 The Document Object Model (DOM) is a programming interface for web documents. It represents the structure of a document as a tree of objects, enabling developers to manipulate its content and structure programmatically.
 
 ### Key Features of the DOM:
-1. **Dynamic Interaction**:  
+1. **Dynamic Interaction**  
     The DOM allows JavaScript to interact with the browser, enabling dynamic updates to the content, structure, and style of a webpage without requiring a full reload.
 
-2. **Capabilities with JavaScript**:  
+2. **Capabilities with JavaScript**  
     - Create, modify, and delete HTML elements dynamically.  
     - Set or update styles, classes, and attributes of elements.  
     - Add event listeners to respond to user interactions like clicks, keypresses, or mouse movements.
 
-3. **DOM Tree**:  
+3. **DOM Tree**  
     - The DOM tree is generated from an HTML document and represents the hierarchical structure of the document.  
     - Each node corresponds to a part of the document (e.g., elements, attributes, text).
 
 ### Common DOM Methods and Properties:
-1. `document.querySelector()` - Select elements.  
-2. `element.classList.add()` - Add a class to an element.  
-3. `element.addEventListener()` - Attach event listeners.  
+- `document.querySelector()` - Select elements.  
+- `element.classList.add()` - Add a class to an element.  
+- `element.addEventListener()` - Attach event listeners.  
 
 Understanding and utilizing the DOM is fundamental for creating interactive and dynamic web applications.
-- Dom needs to store in each different elements in the dom so different type of elements are been created to perform this task.
-- All this operations work because of inheritance as it inherits all methods and properties of parents.
-- Each of the elements have access to properties and methods from their parent elements and some have more properties to access as well.
-- Event listner can be called on all elements of the node tree.
 
-## SELECTING, DELETING AND CREATING ELEMENTS
+---
+
+## Selecting, Deleting, and Creating Elements
 
 ### Selecting Elements
+
 To interact with elements in the DOM, you first need to select them. JavaScript provides several methods for selecting elements:
 
 1. **`document.querySelector()`**  
@@ -68,7 +67,10 @@ To interact with elements in the DOM, you first need to select them. JavaScript 
     console.log(paragraphs); // Logs an HTMLCollection of all <p> elements
     ```
 
+---
+
 ### Deleting Elements
+
 You can remove elements from the DOM using the following methods:
 
 1. **`element.remove()`**  
@@ -86,7 +88,10 @@ You can remove elements from the DOM using the following methods:
     parent.removeChild(child); // Removes the child element from the parent
     ```
 
+---
+
 ### Creating Elements
+
 You can dynamically create new elements and add them to the DOM:
 
 1. **`document.createElement()`**  
@@ -123,4 +128,244 @@ You can dynamically create new elements and add them to the DOM:
     document.body.appendChild(clone); // Adds the cloned element to the <body>
     ```
 
-By combining these methods, you can dynamically manipulate the DOM to create interactive and responsive web applications.
+---
+
+## Styles, Attributes, and Classes
+
+### Styles
+
+You can change the style of an element using the `style` property.  
+```javascript
+const message = document.querySelector('.message');
+message.style.backgroundColor = '#37383d';
+message.style.width = '120%';
+console.log(getComputedStyle(message).height); // Logs the computed height of the element
+```
+
+You can also use `setProperty` to modify CSS variables:  
+```javascript
+document.documentElement.style.setProperty('--color-primary', 'orangered');
+```
+
+---
+
+### Attributes
+
+You can manipulate attributes using the following methods:  
+- `setAttribute()` - Sets an attribute.  
+- `getAttribute()` - Gets an attribute.  
+- `removeAttribute()` - Removes an attribute.  
+- `hasAttribute()` - Checks if an attribute exists.  
+
+Example:  
+```javascript
+const logo = document.querySelector('.nav__logo');
+logo.setAttribute('designer', 'Rishabh');
+console.log(logo.getAttribute('designer')); // Logs 'Rishabh'
+logo.removeAttribute('designer');
+```
+
+---
+
+### Data Attributes
+
+Data attributes allow you to store custom data in elements.  
+```javascript
+const logo = document.querySelector('.nav__logo');
+console.log(logo.dataset.versionNumber); // Accesses the data-version-number attribute
+```
+
+---
+
+### Classes
+
+You can manipulate classes using the `classList` property:  
+- `add()` - Adds a class.  
+- `remove()` - Removes a class.  
+- `toggle()` - Toggles a class.  
+- `contains()` - Checks if a class exists.  
+
+Example:  
+```javascript
+const logo = document.querySelector('.nav__logo');
+logo.classList.add('new-class');
+logo.classList.remove('old-class');
+logo.classList.toggle('active');
+console.log(logo.classList.contains('active')); // Logs true or false
+```
+
+---
+
+## Scrolling
+
+You can scroll to elements using the `scrollIntoView` method:  
+```javascript
+document.querySelector('#section--1').scrollIntoView({ behavior: 'smooth' });
+```
+
+---
+
+## Event Listeners
+
+Event listeners allow you to respond to user interactions.  
+```javascript
+document.querySelector('.btn').addEventListener('click', function (e) {
+  e.preventDefault();
+  console.log('Button clicked!');
+});
+```
+
+The `event` object provides details about the event, such as the target element and coordinates.
+
+By mastering these DOM manipulation techniques, you can create dynamic, interactive, and responsive web applications.
+
+## Mouse Events
+
+Mouse events allow you to respond to user interactions with the mouse, such as hovering, clicking, or moving the cursor over an element.
+
+### Example: `mouseenter` Event
+
+The `mouseenter` event is triggered when the mouse pointer enters the boundaries of an element. You can use it to execute a function when this event occurs.
+
+```javascript
+const h1 = document.querySelector('h1');
+h1.addEventListener('mouseenter', function (e) {
+    e.preventDefault();
+    alert('Hello');
+});
+```
+
+In this example:
+- The `addEventListener` method is used to attach the `mouseenter` event to the `<h1>` element.
+- When the mouse pointer enters the `<h1>` element, an alert box with the message "Hello" is displayed.
+
+Mouse events like `mouseenter` are useful for creating interactive effects, such as tooltips, hover animations, or dynamic content updates.
+### Advanced Mouse Events and Event Propagation
+
+#### Modern Way of Using Mouse Events
+
+You can use `addEventListener` to attach mouse events dynamically. Here's an example of using the `mouseenter` event with a modern approach:
+
+```javascript
+const h1 = document.querySelector('h1');
+
+// Modern way of using mouse events
+const alertH1 = function (e) {
+    e.preventDefault();
+    alert('Hello');
+    h1.removeEventListener('mouseenter', alertH1); // Removes the event listener after execution
+};
+
+h1.addEventListener('mouseenter', alertH1);
+
+// Automatically remove the event listener after 3 seconds
+setTimeout(() => h1.removeEventListener('mouseenter', alertH1), 3000);
+```
+
+In this example:
+- The `mouseenter` event is attached to the `<h1>` element.
+- The event listener is removed after the first execution or after 3 seconds, whichever comes first.
+
+---
+
+#### Old-School Way of Using Mouse Events
+
+Before `addEventListener`, mouse events were often handled using properties like `onmouseenter`. While this approach is less flexible, it is still supported:
+
+```javascript
+h1.onmouseenter = e => {
+    e.preventDefault();
+    alert('Hello');
+};
+```
+
+---
+
+#### Inline Event Handling in HTML
+
+Mouse events can also be handled directly in HTML using inline event attributes. This approach is generally discouraged as it mixes HTML and JavaScript, but it can be useful for simple cases:
+
+```html
+<h1 onmouseenter="alert('Hello')">Hover over me</h1>
+```
+
+---
+
+### Event Propagation: Bubbling and Capturing
+
+When an event occurs, it propagates through the DOM in two phases: **capturing** and **bubbling**.
+
+#### Bubbling Phase
+
+In the bubbling phase, the event starts from the target element and propagates up to the root element. This is the default behavior of most events.
+
+```javascript
+const child = document.querySelector('.child');
+const parent = document.querySelector('.parent');
+
+child.addEventListener('click', function (e) {
+    console.log('Child clicked');
+});
+
+parent.addEventListener('click', function (e) {
+    console.log('Parent clicked');
+});
+```
+
+If you click on the `.child` element:
+- "Child clicked" will be logged first.
+- Then, "Parent clicked" will be logged as the event bubbles up.
+
+You can stop the bubbling phase using the `stopPropagation` method:
+
+```javascript
+child.addEventListener('click', function (e) {
+    e.stopPropagation();
+    console.log('Child clicked');
+});
+```
+
+#### Capturing Phase
+
+In the capturing phase, the event starts from the root element and propagates down to the target element. To listen for events during the capturing phase, pass `{ capture: true }` as an option to `addEventListener`:
+
+```javascript
+parent.addEventListener(
+    'click',
+    function (e) {
+        console.log('Parent clicked during capturing phase');
+    },
+    { capture: true }
+);
+```
+
+---
+
+#### Example: Combining Bubbling and Capturing
+
+```javascript
+document.querySelector('.grandparent').addEventListener(
+    'click',
+    function () {
+        console.log('Grandparent clicked (capturing)');
+    },
+    { capture: true }
+);
+
+document.querySelector('.parent').addEventListener('click', function () {
+    console.log('Parent clicked (bubbling)');
+});
+
+document.querySelector('.child').addEventListener('click', function () {
+    console.log('Child clicked');
+});
+```
+
+If you click on the `.child` element:
+1. "Grandparent clicked (capturing)" will be logged first (capturing phase).
+2. "Child clicked" will be logged next (target phase).
+3. "Parent clicked (bubbling)" will be logged last (bubbling phase).
+
+---
+
+By understanding and leveraging event propagation, you can create more efficient and organized event handling in your web applications.

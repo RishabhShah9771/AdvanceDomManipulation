@@ -155,6 +155,16 @@ function manipulateDOM() {
   //     .querySelector('#section--1')
   //     .scrollIntoView({ behavior: 'smooth' });
   // });
+
+  //Event Listeners:
+  // They are used to listen to the events on the elements.
+  // The first argument is the type of event we want to listen to.
+  // The second argument is the callback function that will be called when the event occurs.
+  // The callback function will be called with the event Object.
+  // The event object contains all the information about the event.
+  // It can be used to prevent the default behaviour of the event.
+  // It can be used to stop the propagation of the event.
+  // It can be used to get the target element of the event and to get coordinates of the events as well.
 }
 
 manipulateDOM();
