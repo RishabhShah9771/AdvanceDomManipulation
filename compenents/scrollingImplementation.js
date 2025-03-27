@@ -8,27 +8,6 @@ export function scrollingImplementation() {
     section1.scrollIntoView({ behavior: 'smooth' });
   });
 
-  // Page Navigation : Using Delegation
-  // Example of Bubble phase and target phase  of the event propagation.
-  // And to perform the capture phase we can add third parameter to the addEventListener method which is true.
-  // The default value of the capture phase is false.
-
-  // Event Delegation
-  // It is a technique where we put the event listener on the parent element and then determine what element originated the event.
-  // This is useful when we have many child elements that we are interested in.
-  // We can then put the event listener on the parent element and then determine what element originated the event.
-  // This is useful when we have many child elements that we are interested in.
-
-  // document.querySelectorAll('.nav__link').forEach(function (el) {
-  //   el.addEventListener('click', function (e) {
-  //     e.preventDefault();
-  //     // We can use the href attribute to select the target element.
-  //     document
-  //       .querySelector(this.getAttribute('href'))
-  //       .scrollIntoView({ behavior: 'smooth' });
-  //   });
-  // });
-
   // PAGE NAVIGATION: USING DELEGATION.
 
   // 1. Add event listener to the common parent element of the navigation links
