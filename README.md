@@ -369,3 +369,48 @@ If you click on the `.child` element:
 ---
 
 By understanding and leveraging event propagation, you can create more efficient and organized event handling in your web applications.
+
+### Event Delegation
+
+Event delegation is a technique where you attach a single event listener to a parent element to manage events for its child elements. Instead of adding individual event listeners to each child, the parent element listens for events and determines which child triggered the event. This approach is efficient, especially when dealing with a large number of child elements.
+
+#### How Event Delegation Works
+
+1. **Event Propagation**  
+    Event delegation relies on the bubbling phase of event propagation. When an event occurs on a child element, it bubbles up to its parent, allowing the parent to handle the event.
+
+2. **Event Targeting**  
+    The `event.target` property identifies the specific child element that triggered the event. This allows the parent to respond appropriately.
+
+#### Benefits of Event Delegation
+
+- **Performance**: Reduces the number of event listeners, improving performance for large DOM structures.
+- **Dynamic Elements**: Handles events for dynamically added child elements without needing to reattach listeners.
+
+#### Example: Smooth Scrolling with Event Delegation
+
+In this example, we use event delegation to implement smooth scrolling for navigation links:
+
+```javascript
+// Attach a single event listener to the parent element
+document.querySelector('.nav__links').addEventListener('click', function (e) {
+  e.preventDefault();
+
+  // Check if the clicked element is a navigation link
+  if (e.target.classList.contains('nav__link')) {
+     const targetId = e.target.getAttribute('href'); // Get the target section ID
+     document.querySelector(targetId).scrollIntoView({ behavior: 'smooth' }); // Smooth scroll to the target section
+  }
+});
+```
+
+#### Explanation:
+
+1. The event listener is attached to the `.nav__links` parent element.
+2. Inside the event handler:
+    - The `e.target` property identifies the clicked element.
+    - The `classList.contains('nav__link')` method ensures the event is handled only for elements with the `nav__link` class.
+    - The `getAttribute('href')` method retrieves the target section's ID.
+    - The `scrollIntoView` method performs smooth scrolling to the target section.
+
+This approach eliminates the need to attach individual event listeners to each navigation link, making the code more efficient and easier to maintain.
