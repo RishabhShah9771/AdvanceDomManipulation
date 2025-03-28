@@ -165,6 +165,31 @@ function manipulateDOM() {
   // It can be used to prevent the default behaviour of the event.
   // It can be used to stop the propagation of the event.
   // It can be used to get the target element of the event and to get coordinates of the events as well.
+
+  const h1 = document.querySelector('h1');
+
+  // Going downwards: child elements
+  // Only children of h1 will be selected if there is same class in other element it will not be selected.
+
+  console.log(h1.querySelectorAll('.highlight'));
+  console.log(h1.childNodes); // All child nodes including text nodes.
+  console.log(h1.children); // Only child elements (HTML elements).
+  // It will only show direct children elements , not the nested ones.
+  h1.firstElementChild.style.color = 'white';
+  h1.lastElementChild.style.color = 'orangered';
+
+  //Going upwards: parent elements
+  console.log(h1.parentNode); // Will select the parent node of h1.
+  console.log(h1.parentElement); // Will select the parent element of h1.
+  h1.closest('.header').style.background = 'var(--gradient-secondary'; // Will select the closest parent element with the class header.
+
+  // Going sideways: siblings
+  // Due to some reason in javscript we can not select the previous sibling element but we can select the next sibling element.
+
+  console.log(h1.previousSibling); // Will select the previous sibling node of h1.
+  console.log(h1.previousElementSibling); // will select the previous sibling element of h1.
+  console.log(h1.nextSibling); // Will select the next sibling node of h1.
+  console.log(h1.nextElementSibling); // Will select the next sibling element of h1.
 }
 
 manipulateDOM();

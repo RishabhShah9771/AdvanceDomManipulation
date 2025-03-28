@@ -1,6 +1,7 @@
 'use strict';
 import { modal, overlay, btnCloseModal, btnsOpenModal } from './domElements.js';
 import { scrollingImplementation } from './scrollingImplementation.js';
+import { tabbedComponent } from './tabbedComponent.js';
 // import manipulateDOM from './example.js';
 
 // Modal window
@@ -32,3 +33,4 @@ document.addEventListener('keydown', function (e) {
 });
 
 scrollingImplementation();
+tabbedComponent();

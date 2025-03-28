@@ -1,7 +1,6 @@
-export function scrollingImplementation() {
-  const buttonScrollTo = document.querySelector('.btn--scroll-to');
-  const section1 = document.querySelector('#section--1');
+import { buttonScrollTo, section1, navLinks } from './domElements.js';
 
+export function scrollingImplementation() {
   buttonScrollTo.addEventListener('click', function (e) {
     e.preventDefault();
 
@@ -11,7 +10,7 @@ export function scrollingImplementation() {
   // PAGE NAVIGATION: USING DELEGATION.
 
   // 1. Add event listener to the common parent element of the navigation links
-  document.querySelector('.nav__links').addEventListener('click', e => {
+  navLinks.addEventListener('click', e => {
     e.preventDefault(); // Prevent default anchor link behavior
 
     // 2. Determine the element that triggered the event

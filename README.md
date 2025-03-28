@@ -414,3 +414,28 @@ document.querySelector('.nav__links').addEventListener('click', function (e) {
     - The `scrollIntoView` method performs smooth scrolling to the target section.
 
 This approach eliminates the need to attach individual event listeners to each navigation link, making the code more efficient and easier to maintain.
+
+### Navigating the DOM: Parent, Child, and Sibling Elements
+
+Understanding how to navigate the DOM is crucial for selecting and manipulating elements effectively. Here's how you can traverse the DOM tree:
+
+---
+
+#### Going Downwards: Selecting Child Elements
+
+You can select child elements of a specific parent element using various methods:
+
+1. **`querySelectorAll()`**  
+    Selects all child elements that match a specific selector within the parent element.  
+    ```javascript
+    const h1 = document.querySelector('h1');
+    console.log(h1.querySelectorAll('.highlight')); // Selects all elements with the class 'highlight'
+  h1.closest('.header').style.background = 'var(--gradient-secondary'; // Will select the closest parent element with the class header.
+
+  // Going sideways: siblings
+  // Due to some reason in javscript we can not select the previous sibling element but we can select the next sibling element.
+
+  console.log(h1.previousSibling); // Will select the previous sibling node of h1.
+  console.log(h1.previousElementSibling); // will select the previous sibling element of h1.
+  console.log(h1.nextSibling); // Will select the next sibling node of h1.
+  console.log(h1.nextElementSibling); // Will select the next sibling element of h1.
