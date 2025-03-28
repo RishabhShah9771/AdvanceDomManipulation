@@ -5,6 +5,7 @@ const btnsOpenModal = document.querySelectorAll('.btn--show-modal');
 const buttonScrollTo = document.querySelector('.btn--scroll-to');
 const section1 = document.querySelector('#section--1');
 const navLinks = document.querySelector('.nav__links');
+const nav = document.querySelector('.nav');
 
 const tabs = document.querySelectorAll('.operations__tab');
 const tabsContainer = document.querySelector('.operations__tab-container');
@@ -20,4 +21,5 @@ export {
   buttonScrollTo,
   section1,
   navLinks,
+  nav,
 };
