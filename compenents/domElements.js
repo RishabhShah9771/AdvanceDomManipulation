@@ -8,10 +8,15 @@ const navLinks = document.querySelector('.nav__links');
 const nav = document.querySelector('.nav');
 const allSections = document.querySelectorAll('.section');
 const imgTargets = document.querySelectorAll('img[data-src]');
+const slides = document.querySelectorAll('.slide');
+const slider = document.querySelector('.slider');
+const btnSliderLeft = document.querySelector('.slider__btn--left');
+const btnSliderRight = document.querySelector('.slider__btn--right');
 
 const tabs = document.querySelectorAll('.operations__tab');
 const tabsContainer = document.querySelector('.operations__tab-container');
 const tabsContent = document.querySelectorAll('.operations__content');
+const dotContainer = document.querySelector('.dots');
 export {
   modal,
   overlay,
@@ -26,4 +31,9 @@ export {
   nav,
   allSections,
   imgTargets,
+  slides,
+  slider,
+  btnSliderLeft,
+  btnSliderRight,
+  dotContainer,
 };

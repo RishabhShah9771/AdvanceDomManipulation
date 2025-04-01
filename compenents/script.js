@@ -3,6 +3,7 @@
 // Importing required DOM elements and functionalities from other modules
 import { modal, overlay, btnCloseModal, btnsOpenModal } from './domElements.js'; // Importing DOM elements for modal functionality
 import { scrollingImplementation } from './scrollingImplementation.js'; // Importing scrolling functionality
+import { sliderImplementation } from './SliderImplementation.js'; // Importing slider functionality
 import { tabbedComponent } from './tabbedComponent.js'; // Importing tabbed component functionality
 
 // Function to handle modal functionality
@@ -42,10 +43,13 @@ const handleModalFunctionality = function () {
 };
 
 // Call the function to initialize modal functionality
-handleModalFunctionality();
+handleModalFunctionality(); // Sets up event listeners for modal open/close functionality
 
 // Initialize scrolling functionality (imported from another module)
-scrollingImplementation();
+scrollingImplementation(); // Enables smooth scrolling behavior for the page
 
 // Initialize tabbed component functionality (imported from another module)
-tabbedComponent();
+tabbedComponent(); // Sets up tabbed navigation functionality
+
+// Initialize slider functionality (imported from another module)
+sliderImplementation(); // Enables slider/carousel functionality
