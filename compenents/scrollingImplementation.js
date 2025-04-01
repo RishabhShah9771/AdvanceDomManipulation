@@ -1,10 +1,17 @@
-import { buttonScrollTo, section1, navLinks, nav } from './domElements.js';
+import {
+  buttonScrollTo,
+  section1,
+  navLinks,
+  nav,
+  allSections,
+} from './domElements.js';
+import lazyImageLoader from './lazyImageLoader.js';
 
-// Function to implement scrolling and navigation-related features
+// Function to implement scrolling, navigation, and other DOM-related features
 export function scrollingImplementation() {
   // Smooth scrolling to Section 1 when the button is clicked
   buttonScrollTo.addEventListener('click', function (e) {
-    e.preventDefault(); // Prevent default button behavior
+    e.preventDefault(); // Prevent default button behavior (e.g., jumping to a link)
 
     // Scroll to Section 1 with smooth scrolling behavior
     section1.scrollIntoView({ behavior: 'smooth' });
@@ -12,9 +19,9 @@ export function scrollingImplementation() {
 
   // PAGE NAVIGATION: USING EVENT DELEGATION
 
-  // 1. Add event listener to the common parent element of the navigation links
+  // 1. Add a single event listener to the common parent element of the navigation links
   navLinks.addEventListener('click', e => {
-    e.preventDefault(); // Prevent default anchor link behavior
+    e.preventDefault(); // Prevent default anchor link behavior (e.g., jumping to a section)
 
     // 2. Check if the clicked element is a navigation link
     if (e.target.classList.contains('nav__link')) {
@@ -40,11 +47,11 @@ export function scrollingImplementation() {
       siblings.forEach(el => {
         if (el !== link) {
           // Reduce opacity for sibling links on hover, reset on mouseout
-          el.style.opacity = this;
+          el.style.opacity = this; // 'this' is bound to the opacity value
         }
       });
       // Adjust opacity for the logo
-      logo.style.opacity = this;
+      logo.style.opacity = this; // 'this' is bound to the opacity value
     }
   }
 
@@ -54,10 +61,8 @@ export function scrollingImplementation() {
   nav.addEventListener('mouseover', handleHover.bind(0.5)); // Trigger hover effect on mouseover
   nav.addEventListener('mouseout', handleHover.bind(1)); // Reset hover effect on mouseout
 
-  // INTERSECTION OVBESERVER API:
+  // INTERSECTION OBSERVER API: Sticky Navigation
 
-  // Callback function will be called each time when the target element is intersecting root element when the threshold is met.
-  // The callback function can be used to perform actions based on the intersection status of the target element.
   // Select the header element to observe
   const header = document.querySelector('.header');
 
@@ -95,10 +100,9 @@ export function scrollingImplementation() {
   // Start observing the header element for intersection changes
   headerObserver.observe(header);
 
-  // Reveal sections on scroll
+  // REVEAL SECTIONS ON SCROLL
 
   // Select all sections to observe for revealing on scroll
-  const allSections = document.querySelectorAll('.section');
 
   // Create a new IntersectionObserver instance to observe sections
   const sectionObserver = new IntersectionObserver(
@@ -132,4 +136,9 @@ export function scrollingImplementation() {
     // Initially add the 'section--hidden' class to hide the section
     section.classList.add('section--hidden');
   });
+
+  // LAZY LOADING IMAGES
+
+  // Call the lazyImageLoader function to implement lazy loading for images
+  lazyImageLoader();
 }
