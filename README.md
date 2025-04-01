@@ -426,16 +426,64 @@ Understanding how to navigate the DOM is crucial for selecting and manipulating 
 You can select child elements of a specific parent element using various methods:
 
 1. **`querySelectorAll()`**  
-    Selects all child elements that match a specific selector within the parent element.  
+    ### Sticky Navigation
+
+    Sticky navigation is a technique where a navigation bar remains fixed at the top of the viewport as the user scrolls down the page. This improves user experience by keeping the navigation easily accessible.
+
+    #### Example: Implementing Sticky Navigation
+
     ```javascript
-    const h1 = document.querySelector('h1');
-    console.log(h1.querySelectorAll('.highlight')); // Selects all elements with the class 'highlight'
-  h1.closest('.header').style.background = 'var(--gradient-secondary'; // Will select the closest parent element with the class header.
+    // Select the navigation bar and the target section
+    const nav = document.querySelector('.nav');
+    const section1 = document.querySelector('#section--1');
 
-  // Going sideways: siblings
-  // Due to some reason in javscript we can not select the previous sibling element but we can select the next sibling element.
+    // Get the initial coordinates of the target section
+    const initialCoords = section1.getBoundingClientRect();
 
-  console.log(h1.previousSibling); // Will select the previous sibling node of h1.
-  console.log(h1.previousElementSibling); // will select the previous sibling element of h1.
-  console.log(h1.nextSibling); // Will select the next sibling node of h1.
-  console.log(h1.nextElementSibling); // Will select the next sibling element of h1.
+    // Add a scroll event listener to the window
+    window.addEventListener('scroll', function () {
+        // Check the current scroll position
+        if (window.scrollY > initialCoords.top) {
+            nav.classList.add('sticky'); // Add the 'sticky' class when the user scrolls past the target section
+        } else {
+            nav.classList.remove('sticky'); // Remove the 'sticky' class when the user scrolls back up
+        }
+    });
+    ```
+
+    #### Explanation:
+
+    1. **`getBoundingClientRect()`**  
+         - Retrieves the position of the target section relative to the viewport.
+         - The `top` property is used to determine when the user has scrolled past the section.
+
+    2. **`window.scrollY`**  
+         - Tracks the vertical scroll position of the page.
+
+    3. **Adding and Removing Classes**  
+         - The `sticky` class is added to the navigation bar when the scroll position exceeds the target section's top position.
+         - The class is removed when the user scrolls back above the target section.
+
+    #### CSS for Sticky Navigation
+
+    To make the navigation bar visually sticky, you can define the `sticky` class in your CSS:
+
+    ```css
+    .nav.sticky {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        background-color: rgba(255, 255, 255, 0.9);
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        z-index: 10;
+    }
+    ```
+
+    This ensures the navigation bar stays fixed at the top of the viewport with a slight background and shadow effect for better visibility.
+
+    #### Notes:
+
+    - This approach is simple but may not be the most efficient for performance, especially on pages with heavy scrolling.
+    - For better performance, consider using the **Intersection Observer API**, which is optimized for detecting element visibility changes.
+
+    By implementing sticky navigation, you can enhance the usability and accessibility of your web application.
