@@ -358,3 +358,122 @@ btnLeft.addEventListener('click', prevSlide);
 ---
 
 By mastering these techniques, you can create dynamic, interactive, and user-friendly web applications.
+
+## DOMContentLoaded, Load, and BeforeUnload Events
+
+### 1. `DOMContentLoaded` Event
+
+The `DOMContentLoaded` event is triggered when the initial HTML document has been completely loaded and parsed, without waiting for stylesheets, images, and subframes to finish loading. This is useful for executing JavaScript as soon as the DOM is ready.
+
+#### Example:
+```javascript
+document.addEventListener('DOMContentLoaded', function () {
+    console.log('DOM fully loaded and parsed');
+    const header = document.querySelector('h1');
+    header.style.color = 'blue';
+});
+```
+
+In this example:
+- The `DOMContentLoaded` event ensures that the script runs only after the DOM is fully loaded.
+- The `<h1>` element's color is changed to blue once the DOM is ready.
+
+---
+
+### 2. `load` Event
+
+The `load` event is triggered when the entire page, including all dependent resources such as stylesheets and images, has finished loading. This is useful for executing scripts that depend on the complete loading of the page.
+
+#### Example:
+```javascript
+window.addEventListener('load', function () {
+    console.log('Page fully loaded');
+    const img = document.querySelector('img');
+    img.style.border = '5px solid green';
+});
+```
+
+In this example:
+- The `load` event ensures that the script runs only after all resources, including images, are fully loaded.
+- A green border is added to an image once the page is completely loaded.
+
+---
+
+### 3. `beforeunload` Event
+
+The `beforeunload` event is triggered when the user is about to leave the page. This is often used to show a confirmation dialog to prevent accidental navigation away from the page.
+
+#### Example:
+```javascript
+window.addEventListener('beforeunload', function (e) {
+    e.preventDefault();
+    e.returnValue = ''; // Required for some browsers to show the confirmation dialog
+    console.log('User is attempting to leave the page');
+});
+```
+
+In this example:
+- The `beforeunload` event prompts the user with a confirmation dialog when they try to leave the page.
+- This is useful for warning users about unsaved changes or other important actions.
+
+---
+
+By understanding these events, you can control the behavior of your web application during different stages of the page lifecycle.
+
+## DEFER and ASYNC Script Loading
+
+When including JavaScript in your HTML, the way scripts are loaded can significantly impact the performance of your web application. Two common attributes used to control script loading are `defer` and `async`.
+
+### 1. `defer` Attribute
+
+The `defer` attribute ensures that the script is downloaded in parallel with the HTML parsing but is executed only after the HTML document has been fully parsed.
+
+#### Key Features:
+- Scripts are executed in the order they appear in the document.
+- Useful for scripts that depend on the DOM being fully loaded.
+
+#### Example:
+```html
+<script src="script.js" defer></script>
+```
+
+In this example:
+- The `script.js` file is downloaded while the HTML is being parsed.
+- The script is executed only after the HTML parsing is complete.
+
+---
+
+### 2. `async` Attribute
+
+The `async` attribute allows the script to be downloaded in parallel with the HTML parsing and executed as soon as it is ready, without waiting for the HTML to finish parsing.
+
+#### Key Features:
+- Scripts are executed as soon as they are downloaded, which may lead to out-of-order execution.
+- Useful for scripts that do not depend on other scripts or the DOM.
+
+#### Example:
+```html
+<script src="script.js" async></script>
+```
+
+In this example:
+- The `script.js` file is downloaded while the HTML is being parsed.
+- The script is executed as soon as it is ready, potentially before the HTML parsing is complete.
+
+---
+
+### Comparison of `defer` and `async`
+
+| Attribute | Execution Order | When to Use |
+|-----------|-----------------|-------------|
+| `defer`   | In order of appearance | For scripts that depend on the DOM or other scripts. |
+| `async`   | As soon as ready (out of order) | For independent scripts that do not rely on the DOM or other scripts. |
+
+---
+
+### Best Practices
+
+- Use `defer` for scripts that manipulate the DOM or depend on other scripts.
+- Use `async` for analytics or tracking scripts that do not interact with the DOM.
+
+By understanding and using `defer` and `async` appropriately, you can optimize the loading performance of your web applications.
